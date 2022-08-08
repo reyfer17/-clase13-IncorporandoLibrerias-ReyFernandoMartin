@@ -87,12 +87,20 @@ function mostrarProductosAgregados(){
             <div class="card-body">
                 <h5 class="card-title">${elemento.nombre}</h5>         
                 <h2 class="card-text">$${elemento.precio}</h2>
-        
+                <button class="btn btn-danger">Eliminar</button>
             </div>
         </div>
         `
     })
+    carrito.forEach((producto,indice) =>{
+        document.getElementById(`productoCarrito${indice}`).lastElementChild.lastElementChild.addEventListener("click",() =>{
+            carrito.splice(indice,1)
+            localStorage.setItem("pedido", JSON.stringify(carrito))
+            mostrarCarrito()
+        })
+    })
 }
+
 function mostrarTotal(){
     let p = new Producto
     divTotal.innerHTML =`
