@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    margin: 1rem;
+}
+img {
+    margin-top: 2rem ;
+    height: 200px;
+}
+h1 {
+    font-size: 4rem;
+    color: black;
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.card-img-top {
+    border-radius: 2rem;
+}
+.carrito{
+    text-align: center;
+    background-color: blue;
+    color: white;
+    margin: 5px;
+    border-radius: 5rem;
+}
+.carrito img{
+border-radius: 5rem;
+}
+.productos{
+    text-align: center;
+    background-color: red;
+    color: white;
+    margin: 5px;
+    border-radius: 2rem;
+}
+.total{
+    text-align: center;
+    background-color: orange;
+    color: black;
+    font-style: italic;
+    margin: 5px;
+    border-radius: 2rem;
+}
+#cantidadEnCarrito{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: orange;
+    margin-top: 0.5rem;
+}
+#tituloCarrito{
+    background-color: orange;
+    font-size: 2rem;
+    color: black;
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
