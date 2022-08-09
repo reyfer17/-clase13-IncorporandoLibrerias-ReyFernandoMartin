@@ -45,6 +45,11 @@ border-radius: 5rem;
     margin: 5px;
     border-radius: 2rem;
 }
+#botonFinalizarCompra{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-top: 2rem;
+    font-size: 3rem;
+}
 #cantidadEnCarrito{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     background-color: orange;

@@ -17,11 +17,11 @@ class Producto {
 
 const pochocloGrande = new Producto ("Pochoclo Grande", 1000, "dulce, en balde", 'images/pochocloGrande.jpg')
 const pochocloMediano = new Producto ("Pochoclo Mediano", 800, "dulce, en caja", 'images/pochocloMediano.jpg')
-const pochocloChico = new Producto ("Pochoclo Chico", 600, "dulce, en bolsita", 'images/pochocloChico.gif')
+const pochocloChico = new Producto ("Pochoclo Chico", 600, "dulce, en bolsita", 'images/pochocloChico.jpg')
 const gaseosaGrande = new Producto ("Gaseosa Grande", 500, "vaso x 950ml", 'images/gaseosaGrande.jpg')
 const gaseosaChica = new Producto ("Gaseosa Chica", 400, "botella x 500ml", 'images/gaseosaChica.jpg')
 const agua = new Producto ("Agua", 300, "botella x 500ml", 'images/agua.png')
-const chocolate = new Producto ("Chocolate", 800, "con leche x 300g", 'images/chocolate.jpg')
+const chocolate = new Producto ("Chocolate", 850, "con leche x 300g", 'images/chocolate.jpg')
 
 const productos = [pochocloGrande, pochocloMediano, pochocloChico, gaseosaGrande, gaseosaChica, agua, chocolate]
 
@@ -30,6 +30,7 @@ const divCarrito =document.getElementById("carritoHTML")
 const divTotal =document.getElementById("total")
 const divCantidadEnCarrito =document.getElementById("cantidadEnCarrito")
 const botonVaciarCarrito = document.getElementById("botonVaciarCarrito")
+const botonFinalizarCompra = document.getElementById("botonFinalizarCompra")
 let carrito = []
 let pedido = []
 let cantidad = 0
@@ -121,3 +122,22 @@ botonVaciarCarrito.addEventListener("click",() =>{
 })
 
 mostrarCarrito()
+botonFinalizarCompra.addEventListener("click",()=>{
+    Swal.fire({
+        title: '¿Desea realizar la compra?',
+      //  text: "El total es de: " ,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '¡Comprar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Su compra se realizó con éxito',
+            'Gracias por comprar en el Candy shop',
+            'success'
+          )
+        }
+      })
+})
