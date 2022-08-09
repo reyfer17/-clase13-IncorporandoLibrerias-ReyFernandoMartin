@@ -103,7 +103,6 @@ function mostrarProductosAgregados(){
         })
     })
 }
-
 function mostrarTotal(){
     let p = new Producto
     divTotal.innerHTML =`
@@ -128,9 +127,10 @@ botonFinalizarCompra.addEventListener("click",()=>{
       //  text: "El total es de: " ,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
+        confirmButtonColor: '#04B431',
         cancelButtonColor: '#d33',
-        confirmButtonText: '¡Comprar!'
+        confirmButtonText: '¡Comprar!',
+        cancelButtonText: 'Seguir comprando'
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire(
