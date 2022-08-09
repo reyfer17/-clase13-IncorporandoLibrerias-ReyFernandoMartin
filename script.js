@@ -58,6 +58,7 @@ productos.forEach((producto,indice) =>{
     document.getElementById(`producto${indice}`).lastElementChild.lastElementChild.addEventListener("click",() =>{
         carrito.push(producto)
         localStorage.setItem("pedido", JSON.stringify(carrito))
+        toastifyCargar()
         mostrarCarrito()
     })
 })
@@ -98,6 +99,7 @@ function mostrarProductosAgregados(){
             carrito.splice(indice,1)
             localStorage.setItem("pedido", JSON.stringify(carrito))
             mostrarCarrito()
+            toastifyEliminar()
         })
     })
 }
@@ -114,14 +116,12 @@ function mostrarTotal(){
     `
 }
 
-//elimino toda la info del array y del localStorage y vuelvo a cero con la carga
 botonVaciarCarrito.addEventListener("click",() =>{
     carrito.splice(0, carrito.length)
     localStorage.setItem("pedido", JSON.stringify(carrito))
     mostrarCarrito()
 })
 
-mostrarCarrito()
 botonFinalizarCompra.addEventListener("click",()=>{
     Swal.fire({
         title: '¿Desea realizar la compra?',
@@ -141,3 +141,38 @@ botonFinalizarCompra.addEventListener("click",()=>{
         }
       })
 })
+
+mostrarCarrito()
+//agregado de funciones con toastify, aplicadas en los botones de cargar y elimnar productos
+function toastifyCargar(){
+    Toastify({
+        text: "Producto agregado al carrito",
+        duration: 4000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+        background: "linear-gradient(to left, #11aaaa, #00ffff)",
+        },
+        onClick: function(){} // Callback after click
+    }).showToast();
+}
+function toastifyEliminar(){
+    Toastify({
+        text: "Producto eliminado del carrito",
+        duration: 4000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+        background: "linear-gradient(to left, #000000, #ff0000)",
+        },
+        onClick: function(){} // Callback after click
+    }).showToast();
+}
