@@ -116,14 +116,12 @@ function mostrarTotal(){
 }
 
 botonVaciarCarrito.addEventListener("click",() =>{
-    carrito.splice(0, carrito.length)
-    localStorage.setItem("pedido", JSON.stringify(carrito))
-    mostrarCarrito()
+    vaciarCarrito()
 })
 
 botonFinalizarCompra.addEventListener("click",()=>{
     Swal.fire({
-        title: '¿Desea realizar la compra?',
+        title: '¿Desea confirmar la compra?',
       //  text: "El total es de: " ,
         icon: 'warning',
         showCancelButton: true,
@@ -133,17 +131,16 @@ botonFinalizarCompra.addEventListener("click",()=>{
         cancelButtonText: 'Seguir comprando'
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire(
-            'Su compra se realizó con éxito',
-            'Gracias por comprar en el Candy shop',
-            'success'
-          )
+            Swal.fire(
+                'Su compra se realizó con éxito',
+                'Gracias por comprar en el Candy shop',
+                'success'
+            )
+            vaciarCarrito()
         }
       })
 })
 
-mostrarCarrito()
-//agregado de funciones con toastify, aplicadas en los botones de cargar y elimnar productos
 function toastifyCargar(){
     Toastify({
         text: "Producto agregado al carrito",
@@ -176,3 +173,11 @@ function toastifyEliminar(){
         onClick: function(){} // Callback after click
     }).showToast();
 }
+
+function vaciarCarrito(){
+    carrito.splice(0, carrito.length)
+    localStorage.setItem("pedido", JSON.stringify(carrito))
+    mostrarCarrito()
+}
+
+mostrarCarrito()
