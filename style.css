@@ -12,8 +12,9 @@ img {
     height: 200px;
 }
 h1 {
+    background-color: blue;
     font-size: 4rem;
-    color: black;
+    color: white;
     text-align: center;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
@@ -45,7 +46,7 @@ border-radius: 5rem;
     margin: 5px;
     border-radius: 2rem;
 }
-#botonFinalizarCompra{
+#botonFinalizarCompras{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     margin-top: 2rem;
     font-size: 3rem;

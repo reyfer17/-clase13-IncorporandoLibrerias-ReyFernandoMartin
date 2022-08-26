@@ -1,0 +1,44 @@
+[
+    {
+        "nombre":"Pochoclo Grande",
+        "precio":1000,
+        "detalle": "dulce, en balde", 
+        "imagen":"images/pochocloGrande.jpg"
+    },
+    {
+        "nombre":"Pochoclo Medio", 
+        "precio":800,
+        "detalle": "dulce, en caja", 
+        "imagen":"images/pochocloMediano.jpg"
+    },
+    {
+        "nombre":"Pochoclo Chico",
+        "precio": 600,
+        "detalle": "dulce, en bolsita", 
+        "imagen":"images/pochocloChico.jpg"
+    },
+    {
+        "nombre":"Gaseosa Grande",
+        "precio": 500,
+        "detalle": "vaso x 950ml",
+        "imagen": "images/gaseosaGrande.jpg"
+    },
+    {
+        "nombre":"Gaseosa Chica",
+        "precio": 400, 
+        "detalle":"botella x 500ml", 
+        "imagen":"images/gaseosaChica.jpg"
+    },
+    {
+        "nombre":"Agua",
+        "precio": 300,
+        "detalle": "botella x 500ml", 
+        "imagen":"images/agua.png"
+    },
+    {
+        "nombre":"Chocolate",
+        "precio": 850, 
+        "detalle":"con leche x 300g", 
+        "imagen":"images/chocolate.jpg"
+    }
+]

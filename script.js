@@ -15,59 +15,65 @@ class Producto {
     }
 }
 
-const pochocloGrande = new Producto ("Pochoclo Grande", 1000, "dulce, en balde", 'images/pochocloGrande.jpg')
-const pochocloMediano = new Producto ("Pochoclo Mediano", 800, "dulce, en caja", 'images/pochocloMediano.jpg')
-const pochocloChico = new Producto ("Pochoclo Chico", 600, "dulce, en bolsita", 'images/pochocloChico.jpg')
-const gaseosaGrande = new Producto ("Gaseosa Grande", 500, "vaso x 950ml", 'images/gaseosaGrande.jpg')
-const gaseosaChica = new Producto ("Gaseosa Chica", 400, "botella x 500ml", 'images/gaseosaChica.jpg')
-const agua = new Producto ("Agua", 300, "botella x 500ml", 'images/agua.png')
-const chocolate = new Producto ("Chocolate", 850, "con leche x 300g", 'images/chocolate.jpg')
+//const pochocloGrande = new Producto ("Pochoclo Grande", 1000, "dulce, en balde", 'images/pochocloGrande.jpg')
+//const pochocloMediano = new Producto ("Pochoclo Medio", 800, "dulce, en caja", 'images/pochocloMediano.jpg')
+//const pochocloChico = new Producto ("Pochoclo Chico", 600, "dulce, en bolsita", 'images/pochocloChico.jpg')
+//const gaseosaGrande = new Producto ("Gaseosa Grande", 500, "vaso x 950ml", 'images/gaseosaGrande.jpg')
+//const gaseosaChica = new Producto ("Gaseosa Chica", 400, "botella x 500ml", 'images/gaseosaChica.jpg')
+//const agua = new Producto ("Agua", 300, "botella x 500ml", 'images/agua.png')
+//const chocolate = new Producto ("Chocolate", 850, "con leche x 300g", 'images/chocolate.jpg')
 
-const productos = [pochocloGrande, pochocloMediano, pochocloChico, gaseosaGrande, gaseosaChica, agua, chocolate]
+//const productos = [pochocloGrande, pochocloMediano, pochocloChico, gaseosaGrande, gaseosaChica, agua, chocolate]
 
 const divProductos =document.getElementById("productos")
 const divCarrito =document.getElementById("carritoHTML")
 const divTotal =document.getElementById("total")
 const divCantidadEnCarrito =document.getElementById("cantidadEnCarrito")
 const botonVaciarCarrito = document.getElementById("botonVaciarCarrito")
-const botonFinalizarCompra = document.getElementById("botonFinalizarCompra")
+const botonFinalizarCompra = document.getElementById("finalizarCompra")
 let carrito = []
 let pedido = []
 let cantidad = 0
+//fetch llamando a un archivo json con productos para representar asincronia
+fetch("./json/productos.json")
+.then(res=>res.json())
+.then(productos=>{
+    //recorro el array para armar el HTML con los productos ofrecidos y luego recorro para identificar el boton Agregar en cada uno
+        productos.forEach((producto, indice)=>{
+            divProductos.innerHTML += `
+            <div class="card productos"  id="producto${indice}" style="width: 14rem;">
+                <img src="${producto.imagen}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${producto.nombre}</h5>
+                    <p class="card-text">${producto.detalle}</p>
+                    <h2 class="card-text">$${producto.precio}</h2>
+                    <button class="btn btn-success">Agregar</button>
+                </div>
+            </div>
+            `
+        })
+        productos.forEach((producto, indice)=>{
+            document.getElementById(`producto${indice}`).lastElementChild.lastElementChild.addEventListener("click",() =>{
+                carrito.push(producto)
+                localStorage.setItem("pedido", JSON.stringify(carrito))
+                toastifyCargar()
+                mostrarCarrito()
+            })
+        })
+})
 //preparación del localStorage
 if(localStorage.getItem("pedido")){
     pedido =JSON.parse(localStorage.getItem("pedido"))
     carrito = structuredClone(pedido)
 } else {localStorage.setItem("pedido", JSON.stringify(carrito))}
 
-//recorro el array de productos para mostrarlo por HTML
-productos.forEach ((producto, indice) => {
-    divProductos.innerHTML += `
-    <div class="card productos"  id="producto${indice}" style="width: 14rem;">
-        <img src="${producto.imagen}" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">${producto.nombre}</h5>
-            <p class="card-text">${producto.detalle}</p>
-            <h2 class="card-text">$${producto.precio}</h2>
-            <button class="btn btn-success">Agregar</button>
-        </div>
-    </div>
-    `
-})
-productos.forEach((producto,indice) =>{
-    document.getElementById(`producto${indice}`).lastElementChild.lastElementChild.addEventListener("click",() =>{
-        carrito.push(producto)
-        localStorage.setItem("pedido", JSON.stringify(carrito))
-        toastifyCargar()
-        mostrarCarrito()
-    })
-})
-//declaro funciones, en las cuales creo el HTML para el carrito
+//declaro funciones, en las cuales creo el HTML para el carrito e interactuo con este
 function mostrarCarrito (){
     mostrarCantidad()
     mostrarTituloCarrito()
     mostrarProductosAgregados()
     mostrarTotal()
+    mostrarBotonFinalizarCompra()
 }
 function mostrarCantidad(){
     cantidad = carrito.length
@@ -76,9 +82,15 @@ function mostrarCantidad(){
     `
 }
 function mostrarTituloCarrito(){
-    divCarrito.innerHTML =`
-    <h2 id="tituloCarrito">Carrito de compras</h2>
-    `
+    if(cantidad>0){
+        divCarrito.innerHTML =`
+        <h2 id="tituloCarrito">Carrito de compras</h2>
+        `
+    } else (
+        divCarrito.innerHTML =`
+        <h2 id="tituloCarrito"></h2>
+        `
+    )
 }
 function mostrarProductosAgregados(){
     carrito.forEach ((elemento, indice) => {
@@ -105,20 +117,37 @@ function mostrarProductosAgregados(){
 }
 function mostrarTotal(){
     let p = new Producto
-    divTotal.innerHTML =`
-    <div class="card" 
-    style="width: 100%;">
-        <div class="card-body total">
-            <h5 class="card-title">TOTAL: $${p.totalizar(carrito)}</h5>
+    if(cantidad>0){
+        divTotal.innerHTML =`
+        <div class="card" 
+        style="width: 100%;">
+            <div class="card-body total">
+                <h5 class="card-title">TOTAL: $${p.totalizar(carrito)}</h5>
+            </div>
         </div>
-    </div>
-    `
+        `
+    } else (
+        divTotal.innerHTML =``
+    )
 }
-
+function mostrarBotonFinalizarCompra(){
+    if(cantidad>0){
+        botonFinalizarCompra.innerHTML = `
+        <button id="botonFinalizarCompras"class="btn btn-primary">Finalizar compra</button>
+        `
+    } else (      
+        botonFinalizarCompra.innerHTML = ``
+    )
+}
+function vaciarCarrito(){
+    carrito.splice(0, carrito.length)
+    localStorage.setItem("pedido", JSON.stringify(carrito))
+    mostrarCarrito()
+}
+//botones para vaciar el carrito y finalizar la compra
 botonVaciarCarrito.addEventListener("click",() =>{
     vaciarCarrito()
 })
-
 botonFinalizarCompra.addEventListener("click",()=>{
     Swal.fire({
         title: '¿Desea confirmar la compra?',
@@ -140,7 +169,7 @@ botonFinalizarCompra.addEventListener("click",()=>{
         }
       })
 })
-
+//funciones para utilizar toastify al agregar y desagregar productos del carrito
 function toastifyCargar(){
     Toastify({
         text: "Producto agregado al carrito",
@@ -173,11 +202,5 @@ function toastifyEliminar(){
         onClick: function(){} // Callback after click
     }).showToast();
 }
-
-function vaciarCarrito(){
-    carrito.splice(0, carrito.length)
-    localStorage.setItem("pedido", JSON.stringify(carrito))
-    mostrarCarrito()
-}
-
+//corro pantalla principal
 mostrarCarrito()
