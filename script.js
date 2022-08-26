@@ -1,4 +1,4 @@
-//declaracion de clases, métodos, objetos y arrays
+//declaracion de clases, métodos, objetos, constantes, variables y arrays
 class Producto {
     constructor(nombre, precio, detalle, imagen){
         this.nombre = nombre
@@ -14,16 +14,6 @@ class Producto {
         return totalPedido
     }
 }
-
-//const pochocloGrande = new Producto ("Pochoclo Grande", 1000, "dulce, en balde", 'images/pochocloGrande.jpg')
-//const pochocloMediano = new Producto ("Pochoclo Medio", 800, "dulce, en caja", 'images/pochocloMediano.jpg')
-//const pochocloChico = new Producto ("Pochoclo Chico", 600, "dulce, en bolsita", 'images/pochocloChico.jpg')
-//const gaseosaGrande = new Producto ("Gaseosa Grande", 500, "vaso x 950ml", 'images/gaseosaGrande.jpg')
-//const gaseosaChica = new Producto ("Gaseosa Chica", 400, "botella x 500ml", 'images/gaseosaChica.jpg')
-//const agua = new Producto ("Agua", 300, "botella x 500ml", 'images/agua.png')
-//const chocolate = new Producto ("Chocolate", 850, "con leche x 300g", 'images/chocolate.jpg')
-
-//const productos = [pochocloGrande, pochocloMediano, pochocloChico, gaseosaGrande, gaseosaChica, agua, chocolate]
 
 const divProductos =document.getElementById("productos")
 const divCarrito =document.getElementById("carritoHTML")
@@ -78,7 +68,7 @@ function mostrarCarrito (){
 function mostrarCantidad(){
     cantidad = carrito.length
     divCantidadEnCarrito.innerHTML = `
-    <div>Total de productos en carrito: ${cantidad}</div>
+    <div class="card" id="celdaCantidad" style="width: 20rem;">Total de productos en carrito: ${cantidad}</div>
     `
 }
 function mostrarTituloCarrito(){

@@ -51,10 +51,11 @@ border-radius: 5rem;
     margin-top: 2rem;
     font-size: 3rem;
 }
-#cantidadEnCarrito{
+#celdaCantidad{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     background-color: orange;
-    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
 }
 #tituloCarrito{
     background-color: orange;
@@ -62,4 +63,5 @@ border-radius: 5rem;
     color: black;
     text-align: center;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-top: 0.5rem;
 }
