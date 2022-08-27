@@ -19,11 +19,12 @@ const divProductos =document.getElementById("productos")
 const divCarrito =document.getElementById("carritoHTML")
 const divTotal =document.getElementById("total")
 const divCantidadEnCarrito =document.getElementById("cantidadEnCarrito")
-const botonVaciarCarrito = document.getElementById("botonVaciarCarrito")
+const botonVaciarCarrito = document.getElementById("divVaciarCarrito")
 const botonFinalizarCompra = document.getElementById("finalizarCompra")
 let carrito = []
 let pedido = []
 let cantidad = 0
+let total
 //fetch llamando a un archivo json con productos para representar asincronia
 fetch("./json/productos.json")
 .then(res=>res.json())
@@ -64,6 +65,7 @@ function mostrarCarrito (){
     mostrarProductosAgregados()
     mostrarTotal()
     mostrarBotonFinalizarCompra()
+    mostrarVaciarCarrito()
 }
 function mostrarCantidad(){
     cantidad = carrito.length
@@ -85,13 +87,14 @@ function mostrarTituloCarrito(){
 function mostrarProductosAgregados(){
     carrito.forEach ((elemento, indice) => {
         divCarrito.innerHTML += `
-        <div class="card carrito" id="productoCarrito${indice}"
-        style="width: 14rem;">
-            <img src="${elemento.imagen}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">${elemento.nombre}</h5>         
-                <h2 class="card-text">$${elemento.precio}</h2>
-                <button class="btn btn-danger">Eliminar</button>
+        <div class="card carrito" id="productoCarrito${indice}">
+            <img src="${elemento.imagen}" class="card-img" alt="...">
+            <h5 class="card-title carrito-title">${elemento.nombre}</h5> 
+            <div class="card-body">               
+                <h2 class="card-text carrito-text">$${elemento.precio}</h2>
+                <button class="btn btn-danger botonTacho"><span class="material-symbols-outlined">
+                delete
+                </span></button>
             </div>
         </div>
         `
@@ -109,16 +112,17 @@ function mostrarTotal(){
     let p = new Producto
     if(cantidad>0){
         divTotal.innerHTML =`
-        <div class="card" 
+        <div class="card cuadroTotal" 
         style="width: 100%;">
-            <div class="card-body total">
-                <h5 class="card-title">TOTAL: $${p.totalizar(carrito)}</h5>
+            <div class="card-body">
+                <h5 class="card-title total">TOTAL: $${p.totalizar(carrito)}</h5>
             </div>
         </div>
         `
     } else (
         divTotal.innerHTML =``
     )
+    total=p.totalizar(carrito)
 }
 function mostrarBotonFinalizarCompra(){
     if(cantidad>0){
@@ -134,6 +138,11 @@ function vaciarCarrito(){
     localStorage.setItem("pedido", JSON.stringify(carrito))
     mostrarCarrito()
 }
+function mostrarVaciarCarrito(){
+    if (cantidad==0){
+        botonVaciarCarrito.innerHTML=``
+    } else(botonVaciarCarrito.innerHTML=`<button id="botonVaciarCarrito" class="btn btn-dark">VACIAR CARRITO</button>`)
+}
 //botones para vaciar el carrito y finalizar la compra
 botonVaciarCarrito.addEventListener("click",() =>{
     vaciarCarrito()
@@ -141,7 +150,7 @@ botonVaciarCarrito.addEventListener("click",() =>{
 botonFinalizarCompra.addEventListener("click",()=>{
     Swal.fire({
         title: '¿Desea confirmar la compra?',
-      //  text: "El total es de: " ,
+        text: "El total es de $ " + total,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#04B431',
@@ -162,8 +171,8 @@ botonFinalizarCompra.addEventListener("click",()=>{
 //funciones para utilizar toastify al agregar y desagregar productos del carrito
 function toastifyCargar(){
     Toastify({
-        text: "Producto agregado al carrito",
-        duration: 4000,
+        text: "PRODUCTO AGREGADO AL CARRITO",
+        duration: 3000,
         destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
         close: true,
@@ -178,8 +187,8 @@ function toastifyCargar(){
 }
 function toastifyEliminar(){
     Toastify({
-        text: "Producto eliminado del carrito",
-        duration: 4000,
+        text: "PRODUCTO ELIMINADO DEL CARRITO",
+        duration: 3000,
         destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
         close: true,

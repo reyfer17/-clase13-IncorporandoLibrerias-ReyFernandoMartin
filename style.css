@@ -2,34 +2,52 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Emilys Candy', cursive;
 }
-
 body{
     margin: 1rem;
+    background-image: url(./images/pochoclofondo1.jpg);
+}
+.botonTacho{
+    border-radius: 3rem;
 }
 img {
     margin-top: 2rem ;
     height: 200px;
 }
 h1 {
-    background-color: blue;
-    font-size: 4rem;
+    background-image: linear-gradient( blue, orange, pink);
+    font-size: 5rem;
     color: white;
     text-align: center;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-.card-img-top {
-    border-radius: 2rem;
+    border-radius: 4rem;
+   
 }
 .carrito{
+    width: 10rem;
     text-align: center;
     background-color: blue;
     color: white;
     margin: 5px;
     border-radius: 5rem;
 }
-.carrito img{
-border-radius: 5rem;
+.carrito img{ 
+    align-self: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 5rem;
+}
+.carrito-text{
+    font-size: 1.5rem;
+}
+.card-img-top {
+    border-radius: 2rem;
+}
+.card-title{
+    font-size: 1rem;
+}
+.cuadroTotal{
+    border-radius: 2rem;
 }
 .productos{
     text-align: center;
@@ -39,29 +57,40 @@ border-radius: 5rem;
     border-radius: 2rem;
 }
 .total{
+    font-size: 3rem;
     text-align: center;
-    background-color: orange;
+    background-image: linear-gradient(  pink, orange);
     color: black;
-    font-style: italic;
     margin: 5px;
     border-radius: 2rem;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+#botonVaciarCarrito{
+    color: red;
+    text-align: right;
 }
 #botonFinalizarCompras{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     margin-top: 2rem;
     font-size: 3rem;
+    text-align: center;
 }
 #celdaCantidad{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    background-color: orange;
-    margin-bottom: 0.5rem;
+    background-image: linear-gradient(  pink, orange);
     font-size: 1.5rem;
+    width:18rem;
 }
 #tituloCarrito{
-    background-color: orange;
-    font-size: 2rem;
+    background-image: linear-gradient(rgb(179, 11, 142),pink, rgb(0, 183, 255));
+    font-size: 4rem;
     color: black;
     text-align: center;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     margin-top: 0.5rem;
+}
+.celdaBotonVaciar{
+    text-align: right;
+    margin-bottom: 0.5rem;
+}
+.celdaBotonIrAlCarrito{
+    text-align: right;
 }

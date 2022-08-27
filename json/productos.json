@@ -1,42 +1,42 @@
 [
     {
-        "nombre":"Pochoclo Grande",
+        "nombre":"POCHOCLO GRANDE",
         "precio":1000,
         "detalle": "dulce, en balde", 
         "imagen":"images/pochocloGrande.jpg"
     },
     {
-        "nombre":"Pochoclo Medio", 
+        "nombre":"POCHOCLO MEDIANO", 
         "precio":800,
         "detalle": "dulce, en caja", 
         "imagen":"images/pochocloMediano.jpg"
     },
     {
-        "nombre":"Pochoclo Chico",
+        "nombre":"POCHOCLO CHICO",
         "precio": 600,
         "detalle": "dulce, en bolsita", 
         "imagen":"images/pochocloChico.jpg"
     },
     {
-        "nombre":"Gaseosa Grande",
+        "nombre":"GASEOSA GRANDE",
         "precio": 500,
         "detalle": "vaso x 950ml",
         "imagen": "images/gaseosaGrande.jpg"
     },
     {
-        "nombre":"Gaseosa Chica",
+        "nombre":"GASEOSA CHICA",
         "precio": 400, 
         "detalle":"botella x 500ml", 
         "imagen":"images/gaseosaChica.jpg"
     },
     {
-        "nombre":"Agua",
+        "nombre":"AGUA MINERAL CON O SIN GAS",
         "precio": 300,
         "detalle": "botella x 500ml", 
         "imagen":"images/agua.png"
     },
     {
-        "nombre":"Chocolate",
+        "nombre":"CHOCOLATE BLOCK",
         "precio": 850, 
         "detalle":"con leche x 300g", 
         "imagen":"images/chocolate.jpg"
