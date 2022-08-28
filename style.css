@@ -73,12 +73,19 @@ h1 {
     margin-top: 2rem;
     font-size: 3rem;
     text-align: center;
+    background-image: linear-gradient(  pink, rgb(16, 24, 192));
+}
+#botonFinalizarCompras:hover{
+    background-image: linear-gradient(  rgb(135, 60, 72), rgb(3, 7, 78));
 }
 #celdaCantidad{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     background-image: linear-gradient(  pink, orange);
     font-size: 1.5rem;
     width:18rem;
+}
+#finalizarCompra{
+    text-align: center;
 }
 #tituloCarrito{
     background-image: linear-gradient(rgb(179, 11, 142),pink, rgb(0, 183, 255));

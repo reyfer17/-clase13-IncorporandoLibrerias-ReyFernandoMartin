@@ -21,10 +21,15 @@ const divTotal =document.getElementById("total")
 const divCantidadEnCarrito =document.getElementById("cantidadEnCarrito")
 const botonVaciarCarrito = document.getElementById("divVaciarCarrito")
 const botonFinalizarCompra = document.getElementById("finalizarCompra")
+
 let carrito = []
 let pedido = []
 let cantidad = 0
 let total
+let nroDeTicket = 1000
+let listadoDePedidos = []
+let indiceLista
+let pedidoAsociado = []
 //fetch llamando a un archivo json con productos para representar asincronia
 fetch("./json/productos.json")
 .then(res=>res.json())
@@ -57,6 +62,17 @@ if(localStorage.getItem("pedido")){
     pedido =JSON.parse(localStorage.getItem("pedido"))
     carrito = structuredClone(pedido)
 } else {localStorage.setItem("pedido", JSON.stringify(carrito))}
+//llevo por local storage un control de los pedidos aparte
+if(localStorage.getItem("nroDeTicket")){
+    nroDeTicket =JSON.parse(localStorage.getItem("nroDeTicket"))
+} else {localStorage.setItem("nroDeTicket", JSON.stringify(nroDeTicket))}
+if(localStorage.getItem("pedidoAsociado")){
+    pedidoAsociado =JSON.parse(localStorage.getItem("pedidoAsociado"))
+} else {localStorage.setItem("pedidoAsociado", JSON.stringify(pedidoAsociado))}
+if(localStorage.getItem("listadoDePedidos")){
+    listadoDePedidos =JSON.parse(localStorage.getItem("listadoDePedidos"))
+} else {localStorage.setItem("listadoDePedidos", JSON.stringify(listadoDePedidos))}
+console.log(listadoDePedidos)
 
 //declaro funciones, en las cuales creo el HTML para el carrito e interactuo con este
 function mostrarCarrito (){
@@ -127,7 +143,7 @@ function mostrarTotal(){
 function mostrarBotonFinalizarCompra(){
     if(cantidad>0){
         botonFinalizarCompra.innerHTML = `
-        <button id="botonFinalizarCompras"class="btn btn-primary">Finalizar compra</button>
+        <button id="botonFinalizarCompras" class="btn btn-primary">Finalizar compra</button>
         `
     } else (      
         botonFinalizarCompra.innerHTML = ``
@@ -161,10 +177,20 @@ botonFinalizarCompra.addEventListener("click",()=>{
         if (result.isConfirmed) {
             Swal.fire(
                 'Su compra se realizó con éxito',
-                'Gracias por comprar en el Candy shop',
+                'Gracias por comprar en el Candy shop, pase por mostrador a pagar y retirar su pedido. Su Nro de ticket es: ' + nroDeTicket,
                 'success'
             )
+            //almaceno en un array el nro de pedido y el pedido, y se va mostrando por consola la totalidad de pedidos para tener un control propio
+            indiceLista=nroDeTicket-1000
+            pedidoAsociado[indiceLista]= structuredClone(carrito)
+            listadoDePedidos[indiceLista]=[nroDeTicket,total,pedidoAsociado[indiceLista]]
+            nroDeTicket++
+            localStorage.setItem("nroDeTicket", JSON.stringify(nroDeTicket))
+            localStorage.setItem("pedidoAsociado", JSON.stringify(pedidoAsociado))
+            localStorage.setItem("listadoDePedidos", JSON.stringify(listadoDePedidos))
             vaciarCarrito()
+            console.clear()
+            console.table(listadoDePedidos)
         }
       })
 })
@@ -201,5 +227,6 @@ function toastifyEliminar(){
         onClick: function(){} // Callback after click
     }).showToast();
 }
+
 //corro pantalla principal
 mostrarCarrito()
